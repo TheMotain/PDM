@@ -1,0 +1,11 @@
+.data
+EntierUn:
+    .long 13481754
+EntierDeux:
+    .long 1234715
+.text
+.globl _start
+_start:
+    movl $1,%r1
+    movl $EntierUn,%rax
+    movl $EntierDeux,%rdx
