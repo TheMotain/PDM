@@ -20,9 +20,9 @@ _start:
 
 while:
     cmp $10 , %rdx
-    je toString
+    je prepareToString
     cmp $0 , %rdx
-    je toString
+    je prepareToString
 
     movq %rdx , %r9
 
@@ -35,8 +35,15 @@ while:
     movb (%rcx) , %dl
     jmp while
 
+prepareToString:
+    movq %rax, %r9
+
 toString:
-    
+    cmp $0 , %rax
+    je end
+
+    idiv %r11
+    movq 
 
 end:
     movq $0 , %rbx
