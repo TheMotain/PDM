@@ -36,14 +36,20 @@ while:
     jmp while
 
 prepareToString:
-    movq %rax, %r9
+    movq $10,%rdx
 
 toString:
     cmp $0 , %rax
     je end
+    
+    shr $2, %rdx 
+    movq %rdx,%r9
 
     idiv %r11
-    movq 
+    add %r10, %rdx
+
+    or %r9,%rdx
+    jmp toString
 
 end:
     movq $0 , %rbx
