@@ -1,0 +1,34 @@
+# info compilateur
+CC=gcc
+CFLAGS=-Wall -Werror -ansi -pedantic
+CFLAGS+= -D_XOPEN_SOURCE=500 -g
+LDFLAGS=-g
+
+# récupératin des fichiers à compiler
+HEADERS=$(wildcard *.h)
+CFILES=$(wildcard *.c)
+
+# remplacement nom des fichiers .c en fichier .o
+OBJS=$(CFILES:.c=.o)
+
+.PHONY: all clean mrproper
+
+# nom de l'exécutable
+EXE=
+
+all: $(EXE)
+
+# construction de l'exécutable
+$(EXE): $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^
+
+makefile.dep: $(CFILES) $(HEADERS)
+	$(CC) -MM $(CFILES) > $@
+
+clean:
+	$(RM) $(OBJS) makefile.dep
+
+mrproper: clean
+	$(RM) $(EXE)
+
+include makefile.dep
