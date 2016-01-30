@@ -24,7 +24,12 @@ boucle:
 
     push %rax
 
+    inc %rbx
+    jmp boucle
+
 symbole:
+    pop %rdx
+    pop %rax
     cmp $43 , %rbx
     je add
     cmp $45 , %rbx
@@ -34,4 +39,28 @@ symbole:
     cmp $47 , %rbx
     je div
 
+add:
+    add %rax , %rdx
+    push %rax
+    jmp boucle
+
+sous:
+    sub %rax , %rdx
+    push %rax
+    jmp boucle
+
+mult:
+    mul %rax , %rdx
+    push %rax
+    jmp boucle
+
+div:
+    idiv %rdx
+    push %rax
+    jmp boucle
+
 fin:
+    pop %rdx
+    movq $0 , %rbx
+    movq $1 , %rax
+    int $0x80
