@@ -1,15 +1,15 @@
 .data
 /* Buffer d'entrée */
 NombreSaisie:
-    .space 10
+    .space 16
 /* Buffer de sortie */
 NombreAffichage:
-    .rept 10
+    .rept 16
     .quad 0
     .endr
 /* Taille Max du Buffer */
 TailleMax:
-    .quad 10
+    .quad 100
 /* Taille de la Saisie */
 TailleSaisie:
     .quad 0
@@ -139,7 +139,7 @@ ascii:
 /* le tableau de caractère étant inversé il nécessite d'être remis dans le bon sens */
 inverse_tableau:
     movq $NombreAffichage , %rcx
-    movq $1 , %rdx
+    movq $0 , %rdx
 
 /* On enpile tous les caractères du tableau jusque atteindre la fin de la chaine */
 empile_tableau:
@@ -168,7 +168,7 @@ affichage:
     movq $4 , %rax
     movq $1 , %rbx
     movq $NombreAffichage , %rcx
-    movq TailleSaisie , %rdx
+    movq %r8 , %rdx
     int $0x80
 
 /* Fin */

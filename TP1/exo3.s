@@ -41,7 +41,7 @@ ascii:
 
 inverse_tab:
     mov $EntierString , %rcx
-    movq $1 , %rdx
+    movq $0 , %rdx
 
 empile_tab:
     cmp Taille, %rdx

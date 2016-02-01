@@ -1,0 +1,6 @@
+Dalencourt Alex Groupe 1
+Hembert Romain Groupe 1
+
+Les 4 exercices sont traités indépendamment dans quatre fichiers distincts.
+Enfin un cinquième fichier: saisihexa, contient la fusion des quatres programmes.
+Ce cinquième programme demande un entier décimal ou hexa décimal, vérifie la validité de la saisie, enregistre l'entier dans un registre puis le réaffiche à l'écran.
