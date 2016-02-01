@@ -1,16 +1,17 @@
 .data
 Tab:
-    .quad '2' , '5' , '+', '3' , '-' , '3' , '7' , '*' , '/' , '.'
+    .quad '9' , '4' , '+', '3' , '-' , '2' , '5' , '*' , '/' , '.'
 TailleMax:
     .quad 10
 .text
 .globl _start
 _start:
-    movq $Tab , %rbx
+    movq $Tab , %rcx
+    movb (%rcx) , %bl
     movq $48 , %r10
 
 boucle:
-    cmp $46 , %rbx
+    cmp $'.' , %rbx
     je fin
     cmp $0 , TailleMax
     je fin
@@ -22,13 +23,14 @@ boucle:
 
     sub %r10 , %rbx
 
-    push %rax
+    push %rbx
 
-    inc %rbx
+    add $8 , %rcx
+    movb (%rcx) , %bl
     jmp boucle
 
 symbole:
-    pop %rdx
+    pop %r8
     pop %rax
     cmp $43 , %rbx
     je add
@@ -40,23 +42,27 @@ symbole:
     je div
 
 add:
-    add %rax , %rdx
-    push %rax
-    jmp boucle
+    add %rax , %r8
+    push %r8
+    jmp incre
 
 sous:
-    sub %rax , %rdx
+    sub %r8 , %rax
     push %rax
-    jmp boucle
+    jmp incre
 
 mult:
-    mul %rax , %rdx
+    imul %r8 , %rax
     push %rax
-    jmp boucle
+    jmp incre
 
 div:
-    idiv %rdx
+    idiv %r8
     push %rax
+
+incre:
+    addq $8 , %rcx
+    movb (%rcx) , %bl
     jmp boucle
 
 fin:
