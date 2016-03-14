@@ -1,19 +1,25 @@
 #include<inttypes.h>
-#include<stdio.h>
-
 
 void myPrintf(char*,int64_t);
-void myPrintfChar(char);
+//void myPrintf2(char*,...);
+void myPrintfASM(char*,int64_t);
 
-void myPrintf(char * format, int64_t entier){
-    int idx = 0;
-    while(format[idx] != '\0'){
-        printf("%c",format[idx]);
-        myPrintfChar(format[idx]);
-        idx++;
-    }
+void myPrintf(char * format, int64_t pointeur){
+    myPrintfASM(format,pointeur);
 }
 
+/*void myPrintf2(char * format, ...){
+    va_list ap;
+    va_start(ap,format);
+}*/
+
 int main(){
-    myPrintf("toto\n",0);
+    char * str = "La string";
+    int val = 76;
+    myPrintf("Un message\n",(int64_t)val);
+    myPrintf("Un caractère %c\n",(int64_t)val);
+    myPrintf("Un entier %d\n",(int64_t)val);
+    myPrintf("Une string: %s\n",(int64_t)&str);
+ //   myPrintf2("toto %c %c\n", (int64_t)&str,(int64_t)&str);
+    return 0;
 }
