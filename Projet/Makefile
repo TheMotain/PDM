@@ -1,8 +1,11 @@
-date : date.o
-	gcc -gstabs -o date date.o
+myprintf : myprintf1.o myprintf2.o
+	gcc -gstabs -o myprintf myprintf1.o myprintf2.o
 
-date.o : date.s
-	gcc -c -o date.o date.s
+myprintf2.o : myprintf.s
+	gcc -c -o myprintf2.o myprintf.s
+
+myprintf1.o : myprintf.c
+	gcc -c -o myprintf1.o myprintf.c
 
 clean :
-	rm -fv date date.o
+	rm -fv myprintf myprintf1.o myprintf2.o
